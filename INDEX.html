@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hello World</title>
+    <link href='/style.css' rel='stylesheet'>
+    <link
+            rel="stylesheet"
+            href="https://cdn.jsdelivr.net/npm/bulma@1.0.2/css/bulma.min.css"
+    >
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Zilla+Slab:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
+</head>
+<body class="zilla-slab-regular">
+<h1 class="is-size-1-desktop , is-size-2-touch , has-text-centered , has-text-weight-bold ">Random Number Generator</h1>
+<div class="box">
+    <form class="box">
+        <div class="field">
+            <label class="label">Starting</label>
+            <div class="control">
+                <input class="input" id="startInput">
+            </div>
+        </div>
+
+        <div class="field">
+            <label class="label">Ending</label>
+            <div class="control">
+                <input class="input" id="endInput">
+            </div>
+        </div>
+
+        <button type="button" class="button is-primary" onclick="saveInputs()">Press me</button>
+        <script defer type="text/javascript" src="/main.js"></script>
+    </form>
+    <table class="table is-bordered is-striped is-narrow is-hoverable is-fullwidth">
+        <thead>
+        <tr>
+            <th>Starting Value</th>
+            <th>Ending Value</th>
+            <th>Random Number</th>
+        </tr>
+        </thead>
+        <tbody id="resultsTable">
+        </tbody>
+    </table>
+</div>
+<script>
+    function saveInputs() {
+        const startValue = parseInt(document.getElementById('startInput').value);
+        const endValue = parseInt(document.getElementById('endInput').value);
+        const randomNumber = Math.floor(Math.random() * (endValue - startValue + 1)) + startValue;
+
+        // Get the table body element
+        const tableBody = document.getElementById('resultsTable');
+
+        // Remove 'is-selected' from any previously selected row
+        const selectedRow = tableBody.querySelector('.is-selected');
+        if (selectedRow) {
+            selectedRow.classList.remove('is-selected');
+        }
+
+        // Create a new table row
+        const newRow = tableBody.insertRow();
+        newRow.classList.add('is-selected'); // Add the 'is-selected' class
+
+        // Create table cells for each value
+        const startCell = newRow.insertCell();
+        const endCell = newRow.insertCell();
+        const randomCell = newRow.insertCell();
+
+        // Set the content of the cells
+        startCell.textContent = startValue;
+        endCell.textContent = endValue;
+        randomCell.textContent = randomNumber;
+    }
+</script>
+
+</body>
+</html>
