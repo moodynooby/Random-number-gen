@@ -33,7 +33,8 @@
             </div>
         </div>
 
-        <button type="button" class="button is-primary" onclick="saveInputs()">Press me</button>
+        <button type="button" class="button is-primary" onclick="saveInputs()">Generate</button>
+        <button type="button" class="button is-danger" onclick="clearAll()">Clear All</button>
     </form>
     <table class="table is-bordered is-striped is-narrow is-hoverable is-fullwidth">
         <thead>
@@ -111,6 +112,14 @@
             newRow.insertCell().textContent = data.random;
         });
     };
+    function clearAll() {
+        // Clear the cookie
+        document.cookie = "randomData=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+
+        // Clear the table
+        const tableBody = document.getElementById('resultsTable');
+        tableBody.innerHTML = ''; // This removes all rows from the table body
+    }
 </script>
 </script>
 
